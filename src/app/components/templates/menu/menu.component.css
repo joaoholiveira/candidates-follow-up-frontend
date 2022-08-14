@@ -1,0 +1,24 @@
+.sidenav {
+    background-color: #53C3C1;
+    width: 280px;
+}
+
+.sidenav a {
+    color: #000000; 
+    font-family: 'Lato', sans-serif; 
+}
+
+.sidenav i {
+    padding-right: 10px;
+    padding-left: 8px;
+}
+
+.content {
+    padding: 15px;
+    background-color: #662D91;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height: 100vh;
+}

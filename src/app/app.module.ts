@@ -4,17 +4,49 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/views/home/home.component';
+import { MenuComponent } from './components/templates/menu/menu.component';
+
+
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table'  
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './components/templates/dialog/dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    MatPaginatorModule, 
+    MatTableModule, 
+    MatDialogModule, 
+    MatFormFieldModule, 
+    MatButtonModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    MatInputModule, 
+    HttpClientModule, 
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
