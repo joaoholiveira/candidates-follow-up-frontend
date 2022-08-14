@@ -24,7 +24,7 @@
                 </i></button>
         </form>
 
-        <div *ngIf="isLoading"><mat-spinner class="loading" [diameter]="50"></mat-spinner></div>
+        <div *ngIf="isLoading"><app-loading></app-loading></div>
 
 
         <table *ngIf="!isLoading" #table mat-table [dataSource]="dataSource" matSort>

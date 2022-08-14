@@ -1,0 +1,9 @@
+.loading {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mat-progress-spinner::ng-deep circle {
+    stroke: #53C3C1;
+}

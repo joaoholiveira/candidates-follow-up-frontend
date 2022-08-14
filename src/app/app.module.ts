@@ -25,6 +25,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FollowupComponent } from './components/views/followup/followup.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoadingComponent } from './components/templates/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HomeComponent,
     MenuComponent,
     DialogComponent,
-    FollowupComponent
+    FollowupComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
