@@ -12,23 +12,27 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table'  
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table'
+import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './components/templates/dialog/dialog.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSortModule } from '@angular/material/sort';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FollowupComponent } from './components/views/followup/followup.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MenuComponent,
-    DialogComponent
+    DialogComponent,
+    FollowupComponent
   ],
   imports: [
     BrowserModule,
@@ -37,16 +41,18 @@ import { MatSortModule } from '@angular/material/sort';
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatPaginatorModule, 
-    MatTableModule, 
-    MatDialogModule, 
-    MatFormFieldModule, 
-    MatButtonModule, 
-    MatDatepickerModule, 
-    MatNativeDateModule, 
-    MatInputModule, 
-    HttpClientModule, 
-    MatSortModule
+    MatPaginatorModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    HttpClientModule,
+    MatSortModule,
+    ReactiveFormsModule, 
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

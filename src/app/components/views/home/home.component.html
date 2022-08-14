@@ -1,38 +1,46 @@
 <div class="container">
-    <h2 class="boasvindas">Olá! Você tem {{ followupsize }} Follow Ups para hoje: <b>{{ data }}.</b></h2>
+
+    <h2 class="boasvindas"> {{textoBoasVindas}}</h2>
+
+
     <mat-card class="mat-elevation-z8">
 
-        <mat-form-field class="input" appearance="fill">
-            <mat-label>Nome do Candidato</mat-label>
-            <input matInput placeholder="Ex. Pizza">
-        </mat-form-field>
+        <form [formGroup]="formFiltro">
+            <mat-form-field class="input" appearance="fill">
+                <mat-label>Nome do Candidato</mat-label>
+                <input matInput formControlName="nomeCandidatoFiltro">
+            </mat-form-field>
+
+            <mat-form-field class="datepicker" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dataRetornoFiltro">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <button class="button-search" mat-button (click)="filtrarFollowUp()"><i class="material-icons">
+                    search
+                </i></button>
+        </form>
+
+        <div *ngIf="isLoading"><mat-spinner class="loading" [diameter]="50"></mat-spinner></div>
 
 
-        <mat-form-field class="datepicker" appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <table *ngIf="!isLoading" #table mat-table [dataSource]="dataSource" matSort>
 
-        <button class="button-search" mat-button><i class="material-icons">
-                search
-            </i></button>
-
-        <table #table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="nomeCandidato">
-                <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Nome Candidato </th>
+                <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Nome do Candidato </th>
                 <td mat-cell *matCellDef="let followup"> {{followup.nomeCandidato}} </td>
             </ng-container>
 
             <ng-container matColumnDef="dataRetorno">
-                <th class="th" mat-header-cell *matHeaderCellDef> Data do Retorno </th>
+                <th class="th" mat-header-cell *matHeaderCellDef> Data do Follow Up </th>
                 <td mat-cell *matCellDef="let followup"> {{followup.dataRetorno}} </td>
             </ng-container>
 
             <ng-container matColumnDef="tipoRetorno">
-                <th class="th" mat-header-cell *matHeaderCellDef> Tipo </th>
+                <th class="th" mat-header-cell *matHeaderCellDef> Canal do Follow Up </th>
                 <td mat-cell *matCellDef="let followup"> {{followup.tipoRetorno.descricao}} </td>
             </ng-container>
 

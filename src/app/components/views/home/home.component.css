@@ -20,28 +20,38 @@ table {
     border-color: currentColor;
 }
 
-.boasvindas{
+.boasvindas {
     color: #EF864A;
     font-family: 'Lato', sans-serif;
 }
 
-.datepicker{
+.datepicker {
     background-color: white;
     margin-bottom: 1rem;
 }
 
-.input{
+.input {
     background-color: white;
     width: 30rem;
     margin-right: 3rem;
 }
 
-.button-search{
+.button-search {
     margin-left: 2rem;
     height: 2rem;
 }
 
-.th{
+.th {
     font-size: large;
     font-weight: bold;
 }
+
+.loading {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mat-progress-spinner::ng-deep circle {
+    stroke: #53C3C1;;
+  }

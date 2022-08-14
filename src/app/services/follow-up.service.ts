@@ -15,4 +15,9 @@ export class FollowUpService {
     return this.http.get<FollowUp[]>(`${ENDPOINTS.FollowUpHabilitadosComDataAtual}`); 
   }
 
+  listarFollowUpsPelaDescricaoEDataDeRetorno(nomeCandidato: string, dataRetorno: string): Observable<FollowUp[]>{
+    return this.http.get<FollowUp[]>(`${ENDPOINTS.FollowUpHabilitadosPorDescricaoEData}?nomeCandidato=`+nomeCandidato+`&dataRetorno=`+dataRetorno); 
+  }
+
+
 }
