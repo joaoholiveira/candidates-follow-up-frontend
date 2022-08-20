@@ -2,3 +2,43 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.success-snackbar {
+    color: white;
+    background: #7dc590;
+}
+
+.error-snackbar {
+    color: white;
+    background: #cf6363;
+}
+
+.btn-success {
+    color: white;
+    background-color: #2ea34d;
+}
+
+table {
+    cursor: pointer;
+    width: 100%;
+}
+
+.card-has-no-items{
+    width: 320px;
+    height: 80px;
+    margin: 0 auto;
+    background-color: #662D91;
+    border-radius: 1em;
+    border-color: #EF864A;
+}
+
+.texto-has-no-items{
+    color: #EF864A;
+    font-size: large;
+    padding: 2rem;
+}
+
+.th {
+    font-size: large;
+    font-weight: bold;
+}

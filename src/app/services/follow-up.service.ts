@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ENDPOINTS } from '../api/api-config';
-import { FollowUp } from '../model/follow-up';
+import { FollowUp } from '../model/follow-up.model';
 
 @Injectable({
   providedIn: 'root'

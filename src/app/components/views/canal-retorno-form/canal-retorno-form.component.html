@@ -1,0 +1,30 @@
+<button mat-button color="primary" (click)="selecionarCanalRetorno(undefined)">
+    <i class="material-icons">
+        add
+    </i>
+    Novo
+</button>
+<br/>
+<mat-form-field class="input" appearance="fill">
+    <mat-label>Descrição do Canal de Retorno</mat-label>
+    <input matInput placeholder="Buscar..."  autocomplete="off">
+</mat-form-field>
+
+<div *ngIf="isLoading">
+    <app-loading></app-loading>
+</div>
+
+
+<table *ngIf="!isLoading" #table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="descricao">
+        <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>
+        <td mat-cell *matCellDef="let canalRetorno"> {{canalRetorno.descricao}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="selecionarCanalRetorno(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page">
+</mat-paginator>

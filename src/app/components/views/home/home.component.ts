@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FollowUp } from 'src/app/model/follow-up';
+import { FollowUp } from 'src/app/model/follow-up.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../templates/dialog/dialog.component';
 import { FollowUpService } from 'src/app/services/follow-up.service';
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<FollowUp>();
   formFiltro: FormGroup;
   isLoading: boolean = true;
-
+  hasFollowUp: boolean = true; 
 
   constructor(public dialog: MatDialog, private followUpService: FollowUpService) {
     this.formFiltro = new FormGroup({
@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   listarFollowUps() {
+    this.hasFollowUp = true; 
     this.followUpService.listarFollowUpsPelaDataAtual()
       .subscribe((data: FollowUp[]) => {
         this.dataSource.data = data;
@@ -54,14 +55,18 @@ export class HomeComponent implements OnInit {
         if (this.dataSource.data.length > 1) this.textoBoasVindas += " Ups";
         else if (this.dataSource.data.length == 1) this.textoBoasVindas += " Up";
         else this.textoBoasVindas = "Olá! Você não possui nenhum Follow Up";
+      
         this.textoBoasVindas += " para hoje " + this.data.toString();
         setTimeout(() => {
           this.isLoading = false;
-        }, 1500);
+          if (this.dataSource.data.length == 0)  this.hasFollowUp = false;
+        }, 1000);
       })
   }
 
   filtrarFollowUp() {
+    this.isLoading = true;
+    this.hasFollowUp = true; 
     let nomeCandidato = this.formFiltro.controls['nomeCandidatoFiltro'].value;
     let dataRetorno = this.formFiltro.controls['dataRetornoFiltro'].value;
 
@@ -69,16 +74,22 @@ export class HomeComponent implements OnInit {
 
     this.followUpService.listarFollowUpsPelaDescricaoEDataDeRetorno(nomeCandidato, dataRetorno)
       .subscribe((data: FollowUp[]) => {
-        console.log(data);
-
         this.dataSource.data = [];
         this.dataSource.data = data;
+        setTimeout(() => {
+          this.isLoading = false;
+          if (this.dataSource.data.length == 0) this.hasFollowUp = false;
+        }, 1200);
+
+      }, error => {
+        setTimeout(() => {
+          this.isLoading = false;
+          this.hasFollowUp = false
+        }, 1200);
       })
   }
 
   add(row: FollowUp) {
-    console.log(row);
-
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       data: { title: "Marcar " + row['nomeCandidato'] + " como contatado?", id: row['id'] },

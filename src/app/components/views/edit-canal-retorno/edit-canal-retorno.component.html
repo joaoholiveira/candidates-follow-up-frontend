@@ -1,0 +1,16 @@
+  Use o campo abaixo para <strong> {{textoBotaoSalvar}} </strong> canal de retorno. <br>
+  <form [formGroup]="formCanalRetorno" (ngSubmit)="salvarCanalRetorno()">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Descrição </mat-label>
+      <input matInput formControlName="descricao" autocomplete="off" required>
+      <mat-error *ngIf="formCanalRetorno.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="btn-success" [disabled]="formCanalRetorno.invalid"
+      [style.background-color]="formCanalRetorno.invalid ? '#898c8a' : '#39ad58'">
+      <i class="material-icons">
+        check
+      </i>
+      {{textoBotaoSalvar}}
+    </button>
+  </form>

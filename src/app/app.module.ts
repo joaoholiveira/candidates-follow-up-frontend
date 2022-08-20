@@ -24,8 +24,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSortModule } from '@angular/material/sort';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FollowupComponent } from './components/views/followup/followup.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingComponent } from './components/templates/loading/loading.component';
+import { CanalRetornoComponent } from "./components/views/canal-retorno/canal-retorno.component";
+import { CanalRetornoFormComponent } from './components/views/canal-retorno-form/canal-retorno-form.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno/edit-canal-retorno.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +39,8 @@ import { LoadingComponent } from './components/templates/loading/loading.compone
     MenuComponent,
     DialogComponent,
     FollowupComponent,
-    LoadingComponent
+    LoadingComponent,
+    CanalRetornoComponent, CanalRetornoFormComponent, EditCanalRetornoComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +59,9 @@ import { LoadingComponent } from './components/templates/loading/loading.compone
     MatInputModule,
     HttpClientModule,
     MatSortModule,
-    ReactiveFormsModule, 
-    MatProgressSpinnerModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
