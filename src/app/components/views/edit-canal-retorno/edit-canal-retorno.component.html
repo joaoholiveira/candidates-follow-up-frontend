@@ -2,7 +2,7 @@
   <form [formGroup]="formCanalRetorno" (ngSubmit)="salvarCanalRetorno()">
     <mat-form-field class="input" appearance="fill">
       <mat-label>Descrição </mat-label>
-      <input matInput formControlName="descricao" autocomplete="off" required>
+      <input matInput class="input" formControlName="descricao" autocomplete="off" required>
       <mat-error *ngIf="formCanalRetorno.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 

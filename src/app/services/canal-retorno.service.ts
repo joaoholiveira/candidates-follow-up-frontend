@@ -15,16 +15,20 @@ export class CanalRetornoService {
     return this.http.get<CanalRetorno[]>(`${ENDPOINTS.listarTodosCanaisDeRetornoHabilitados}`); 
   }
 
+  listarCanalDeRetornoPorDescricao(descricao: string): Observable<CanalRetorno[]>{
+    return this.http.get<CanalRetorno[]>(`${ENDPOINTS.listarTodosCanaisDeRetornoHabilitadosPorDescricao}?descricao=`+descricao);
+  }
+
   inserirNovoCanalDeRetorno(canalRetorno: CanalRetorno){
     return this.http.post(`${ENDPOINTS.CanalRetorno}`, canalRetorno, {observe: 'response'});
   }
 
   editarCanalDeRetorno(canalRetorno: CanalRetorno){
-    return this.http.put(`${ENDPOINTS.CanalRetorno}/`+canalRetorno.id, canalRetorno, {observe: 'response'});
+    return this.http.put(`${ENDPOINTS.CanalRetorno}`+canalRetorno.id, canalRetorno, {observe: 'response'});
   }
 
-  listarCanalDeRetornoPorDescricao(descricao: string): Observable<CanalRetorno[]>{
-    return this.http.get<CanalRetorno[]>(`${ENDPOINTS.listarTodosCanaisDeRetornoHabilitadosPorDescricao}?descricao=`+descricao);
+  desabilitarCanalDeRetorno(id: number) {
+    return this.http.put(`${ENDPOINTS.desabilitarCanalDeRetorno}`+id, {observe: 'response'});
   }
 
 }

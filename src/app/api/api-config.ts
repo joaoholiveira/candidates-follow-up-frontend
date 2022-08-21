@@ -9,5 +9,6 @@ export const ENDPOINTS = {
     
     CanalRetorno: API_CONFIG.baseUrl + "tipo-retorno", 
     listarTodosCanaisDeRetornoHabilitados: API_CONFIG.baseUrl + "tipo-retorno",
-    listarTodosCanaisDeRetornoHabilitadosPorDescricao: API_CONFIG.baseUrl + "tipo-retorno/descricao"
+    listarTodosCanaisDeRetornoHabilitadosPorDescricao: API_CONFIG.baseUrl + "tipo-retorno/descricao/",
+    desabilitarCanalDeRetorno: API_CONFIG.baseUrl + "tipo-retorno/desabilitar/"
 }

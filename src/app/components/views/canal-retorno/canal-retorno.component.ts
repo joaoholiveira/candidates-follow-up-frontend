@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CanalRetorno } from 'src/app/model/canal-retorno.model';
 import { CanalRetornoService } from 'src/app/services/canal-retorno.service';
 import { SnackbarService } from 'src/app/services/utils/snackbar.service';
+import { DialogComponent } from '../../templates/dialog/dialog.component';
 import { EditCanalRetornoComponent } from '../edit-canal-retorno/edit-canal-retorno.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { EditCanalRetornoComponent } from '../edit-canal-retorno/edit-canal-reto
 })
 export class CanalRetornoComponent implements OnInit {
 
-  displayedColumns: string[] = ['descricao'];
+  displayedColumns: string[] = ['descricao', 'excluir'];
   isLoading: boolean = true;
   hasCanaisRetorno: boolean = true;
 
@@ -68,7 +69,7 @@ export class CanalRetornoComponent implements OnInit {
 
   selecionarCanalRetorno(canalRetorno?: CanalRetorno) {
     const dialogRef = this.dialog.open(EditCanalRetornoComponent, {
-      width: '250px',
+      width: '350px',
       data: { canalRetorno },
     });
   }
@@ -87,12 +88,33 @@ export class CanalRetornoComponent implements OnInit {
     }
   }
 
+  excluirCanalDeRetorno(canalRetorno: CanalRetorno) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { title: "Quer excluir o canal de retorno " + canalRetorno.descricao + "?", id: canalRetorno.id },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      let id = result;
+      if (id) this.desabilitarCanalDeRetorno(id);
+    });
+  }
+
+  desabilitarCanalDeRetorno(id: number) {
+    this.canalRetornoService.desabilitarCanalDeRetorno(id)
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.log(error);
+      })
+  }
+
   // listarCanaisRetornoPorDescricao(descricao: string) {
   //   this.canalRetornoService.listarCanalDeRetornoPorDescricao(descricao)
   //     .subscribe((data: CanalRetorno[]) =>{ 
   //       this.dataSource.data = data; 
   //     }, error =>{
-        
+
   //     })
   // }
 
