@@ -27,7 +27,6 @@ import { FollowupComponent } from './components/views/followup/followup.componen
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingComponent } from './components/templates/loading/loading.component';
 import { CanalRetornoComponent } from "./components/views/canal-retorno/canal-retorno.component";
-import { CanalRetornoFormComponent } from './components/views/canal-retorno-form/canal-retorno-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno/edit-canal-retorno.component';
 
@@ -40,7 +39,7 @@ import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno
     DialogComponent,
     FollowupComponent,
     LoadingComponent,
-    CanalRetornoComponent, CanalRetornoFormComponent, EditCanalRetornoComponent
+    CanalRetornoComponent, EditCanalRetornoComponent
   ],
   imports: [
     BrowserModule,
