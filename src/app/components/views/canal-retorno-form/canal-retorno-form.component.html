@@ -5,10 +5,17 @@
     Novo
 </button>
 <br/>
-<mat-form-field class="input" appearance="fill">
-    <mat-label>Descrição do Canal de Retorno</mat-label>
-    <input matInput placeholder="Buscar..."  autocomplete="off">
-</mat-form-field>
+<form [formGroup]="formFiltro" (ngSubmit)="applyFilter()">
+    <mat-form-field class="input" appearance="fill">
+        <mat-label>Descrição do Canal de Retorno</mat-label>
+        <input matInput placeholder="Buscar..." formControlName="descricaoFiltro" autocomplete="off">
+    </mat-form-field>
+    <button mat-button type="submit" (click)="applyFilter()">
+        <i class="material-icons">
+            search
+        </i>
+    </button>
+</form>
 
 <div *ngIf="isLoading">
     <app-loading></app-loading>
@@ -18,6 +25,12 @@
     <div class="texto-has-no-items">
         Nenhum Canal de Retorno encontrado!
     </div>
+    <button mat-button color="primary" type="submit" style="margin: 0 auto;" (click)="listarCanaisDeRetorno()">
+        <i class="material-icons">
+            refresh
+        </i>
+        Recarregar
+    </button>
 </div>
 
 

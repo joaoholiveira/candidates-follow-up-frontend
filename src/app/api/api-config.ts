@@ -8,5 +8,6 @@ export const ENDPOINTS = {
     FollowUpHabilitadosPorDescricaoEData: API_CONFIG.baseUrl + "candidato-retorno/nome-candidato-data-retorno",
     
     CanalRetorno: API_CONFIG.baseUrl + "tipo-retorno", 
-    listarTodosCanaisDeRetornoHabilitados: API_CONFIG.baseUrl + "tipo-retorno"
+    listarTodosCanaisDeRetornoHabilitados: API_CONFIG.baseUrl + "tipo-retorno",
+    listarTodosCanaisDeRetornoHabilitadosPorDescricao: API_CONFIG.baseUrl + "tipo-retorno/descricao"
 }

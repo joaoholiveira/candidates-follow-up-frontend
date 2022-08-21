@@ -23,4 +23,8 @@ export class CanalRetornoService {
     return this.http.put(`${ENDPOINTS.CanalRetorno}/`+canalRetorno.id, canalRetorno, {observe: 'response'});
   }
 
+  listarCanalDeRetornoPorDescricao(descricao: string): Observable<CanalRetorno[]>{
+    return this.http.get<CanalRetorno[]>(`${ENDPOINTS.listarTodosCanaisDeRetornoHabilitadosPorDescricao}?descricao=`+descricao);
+  }
+
 }

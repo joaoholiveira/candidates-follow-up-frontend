@@ -18,7 +18,9 @@ import { EditCanalRetornoComponent } from '../edit-canal-retorno/edit-canal-reto
 export class CanalRetornoFormComponent implements OnInit {
   displayedColumns: string[] = ['descricao'];
   isLoading: boolean = true;
-  hasCanaisRetorno: boolean = true; 
+  hasCanaisRetorno: boolean = true;
+
+  formFiltro: FormGroup;
 
   dataSource = new MatTableDataSource<CanalRetorno>();
   clickedRows = new Set<CanalRetorno>();
@@ -27,7 +29,13 @@ export class CanalRetornoFormComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   constructor(private canalRetornoService: CanalRetornoService, public dialog: MatDialog, private snackbarService: SnackbarService) {
+
+    this.formFiltro = new FormGroup({
+      descricaoFiltro: new FormControl("")
+    })
+
   }
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -40,6 +48,8 @@ export class CanalRetornoFormComponent implements OnInit {
 
   listarCanaisDeRetorno() {
     this.isLoading = true;
+    this.hasCanaisRetorno = true;
+    this.formFiltro.reset();
 
     this.canalRetornoService.listarTodosCanaisDeRetornoHabilitados()
       .subscribe((data: CanalRetorno[]) => {
@@ -56,10 +66,33 @@ export class CanalRetornoFormComponent implements OnInit {
       })
   }
 
-  selecionarCanalRetorno(canalRetorno?: CanalRetorno){
+  selecionarCanalRetorno(canalRetorno?: CanalRetorno) {
     const dialogRef = this.dialog.open(EditCanalRetornoComponent, {
       width: '250px',
       data: { canalRetorno },
     });
   }
+
+  applyFilter() {
+    this.hasCanaisRetorno = true;
+    let descricao = this.formFiltro.controls["descricaoFiltro"].value.trim();
+    let filterValueLower = descricao.toLowerCase();
+
+    if (descricao === '') this.listarCanaisDeRetorno();
+    else {
+      this.dataSource.data = this.dataSource.data.filter((canalRetorno) => canalRetorno.descricao.toLocaleLowerCase().includes(filterValueLower));
+      if (this.dataSource.data.length === 0) {
+        this.hasCanaisRetorno = false;
+      }
+    }
+  }
+
+  // listarCanaisRetornoPorDescricao(descricao: string) {
+  //   this.canalRetornoService.listarCanalDeRetornoPorDescricao(descricao)
+  //     .subscribe((data: CanalRetorno[]) =>{ 
+  //       this.dataSource.data = data; 
+  //     }, error =>{
+        
+  //     })
+  // }
 }
