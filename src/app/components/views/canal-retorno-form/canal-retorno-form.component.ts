@@ -18,6 +18,7 @@ import { EditCanalRetornoComponent } from '../edit-canal-retorno/edit-canal-reto
 export class CanalRetornoFormComponent implements OnInit {
   displayedColumns: string[] = ['descricao'];
   isLoading: boolean = true;
+  hasCanaisRetorno: boolean = true; 
 
   dataSource = new MatTableDataSource<CanalRetorno>();
   clickedRows = new Set<CanalRetorno>();
@@ -25,7 +26,7 @@ export class CanalRetornoFormComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
-  constructor(private canalRetornoService: CanalRetornoService, public dialog: MatDialog) {
+  constructor(private canalRetornoService: CanalRetornoService, public dialog: MatDialog, private snackbarService: SnackbarService) {
   }
 
   ngAfterViewInit() {
@@ -45,6 +46,12 @@ export class CanalRetornoFormComponent implements OnInit {
         this.dataSource.data = data;
         setTimeout(() => {
           this.isLoading = false;
+        }, 1000);
+      }, error => {
+        setTimeout(() => {
+          this.isLoading = false;
+          this.hasCanaisRetorno = false;
+          this.snackbarService.showSnackBar("Erro a listar Canais de Retorno! Tente novamente!", 5000, "error-snackbar");
         }, 1000);
       })
   }

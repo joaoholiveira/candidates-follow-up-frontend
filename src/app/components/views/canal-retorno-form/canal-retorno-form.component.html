@@ -14,8 +14,14 @@
     <app-loading></app-loading>
 </div>
 
+<div *ngIf="!hasCanaisRetorno" class="card-has-no-items">
+    <div class="texto-has-no-items">
+        Nenhum Canal de Retorno encontrado!
+    </div>
+</div>
 
-<table *ngIf="!isLoading" #table mat-table [dataSource]="dataSource" matSort>
+
+<table *ngIf="!isLoading && hasCanaisRetorno" #table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="descricao">
         <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>

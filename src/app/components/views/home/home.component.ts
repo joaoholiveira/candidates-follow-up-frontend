@@ -7,6 +7,7 @@ import { DialogComponent } from '../../templates/dialog/dialog.component';
 import { FollowUpService } from 'src/app/services/follow-up.service';
 import { MatSort } from '@angular/material/sort';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SnackbarService } from 'src/app/services/utils/snackbar.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   isLoading: boolean = true;
   hasFollowUp: boolean = true; 
 
-  constructor(public dialog: MatDialog, private followUpService: FollowUpService) {
+  constructor(public dialog: MatDialog, private followUpService: FollowUpService, private snackbarService: SnackbarService) {
     this.formFiltro = new FormGroup({
       nomeCandidatoFiltro: new FormControl(''),
       dataRetornoFiltro: new FormControl('')
@@ -60,6 +61,12 @@ export class HomeComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
           if (this.dataSource.data.length == 0)  this.hasFollowUp = false;
+        }, 1000);
+      }, error =>{        
+        setTimeout(() => {
+          this.isLoading = false;
+          this.hasFollowUp = false;
+          this.snackbarService.showSnackBar("Erro a listar Follow Ups! Tente novamente!", 5000, "error-snackbar");
         }, 1000);
       })
   }
