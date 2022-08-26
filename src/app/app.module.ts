@@ -30,7 +30,6 @@ import { CanalRetornoComponent } from "./components/views/canal-retorno/canal-re
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno/edit-canal-retorno.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

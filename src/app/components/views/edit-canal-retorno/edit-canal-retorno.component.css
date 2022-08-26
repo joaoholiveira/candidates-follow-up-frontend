@@ -1,3 +1,11 @@
 .input{
     width: 300px;
+    margin-top: 0.8rem;
+}
+
+.btn-success-form-canal {
+    color: white;
+    background-color: #2ea34d;
+    width: 100%;
+    margin-top: 0.8rem;
 }

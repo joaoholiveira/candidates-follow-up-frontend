@@ -15,7 +15,7 @@ import { DialogComponent, DialogData } from '../../templates/dialog/dialog.compo
 export class EditCanalRetornoComponent implements OnInit {
   canalRetorno: CanalRetorno;
   formCanalRetorno: FormGroup;
-  textoBotaoSalvar: string = "Inserir";
+  textoBotaoSalvar: string = "Criar canal";
   editando: boolean = false;
 
   constructor(
@@ -78,7 +78,7 @@ export class EditCanalRetornoComponent implements OnInit {
 
   fechar() {
     setTimeout(() => {
-      this.dialogRef.close();
+      this.dialogRef.close(true);
     }, 500);
   }
 

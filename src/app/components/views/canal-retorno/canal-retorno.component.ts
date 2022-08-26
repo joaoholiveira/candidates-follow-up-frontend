@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CanalRetorno } from 'src/app/model/canal-retorno.model';
 import { CanalRetornoService } from 'src/app/services/canal-retorno.service';
+import { FollowUpService } from 'src/app/services/follow-up.service';
 import { SnackbarService } from 'src/app/services/utils/snackbar.service';
 import { DialogComponent } from '../../templates/dialog/dialog.component';
 import { EditCanalRetornoComponent } from '../edit-canal-retorno/edit-canal-retorno.component';
@@ -29,14 +30,14 @@ export class CanalRetornoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
-  constructor(private canalRetornoService: CanalRetornoService, public dialog: MatDialog, private snackbarService: SnackbarService) {
+  constructor(private canalRetornoService: CanalRetornoService, public dialog: MatDialog, private snackbarService: SnackbarService,
+    private followUpService: FollowUpService) {
 
     this.formFiltro = new FormGroup({
       descricaoFiltro: new FormControl("")
     })
 
   }
-
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -51,18 +52,20 @@ export class CanalRetornoComponent implements OnInit {
     this.isLoading = true;
     this.hasCanaisRetorno = true;
     this.formFiltro.reset();
+    this.dataSource.filter = "";
 
     this.canalRetornoService.listarTodosCanaisDeRetornoHabilitados()
-      .subscribe((data: CanalRetorno[]) => {
+      .subscribe((data: CanalRetorno[]) => {        
         this.dataSource.data = data;
+        
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);
       }, error => {
+        this.isLoading = false;
+        this.hasCanaisRetorno = false;
         setTimeout(() => {
-          this.isLoading = false;
-          this.hasCanaisRetorno = false;
-          this.snackbarService.showSnackBar("Erro a listar Canais de Retorno! Tente novamente!", 5000, "error-snackbar");
+          this.snackbarService.exibirErro(error);
         }, 1000);
       })
   }
@@ -72,20 +75,17 @@ export class CanalRetornoComponent implements OnInit {
       width: '350px',
       data: { canalRetorno },
     });
+
+    dialogRef.afterClosed()
+      .subscribe(response =>{        
+        if(response) this.listarCanaisDeRetorno();
+      })
+
   }
 
-  applyFilter() {
-    this.hasCanaisRetorno = true;
-    let descricao = this.formFiltro.controls["descricaoFiltro"].value.trim();
-    let filterValueLower = descricao.toLowerCase();
-
-    if (descricao === '') this.listarCanaisDeRetorno();
-    else {
-      this.dataSource.data = this.dataSource.data.filter((canalRetorno) => canalRetorno.descricao.toLocaleLowerCase().includes(filterValueLower));
-      if (this.dataSource.data.length === 0) {
-        this.hasCanaisRetorno = false;
-      }
-    }
+  applyFilter(event: any) {
+    let descricao = event.target.value;
+    this.dataSource.filter = descricao.toLowerCase();    
   }
 
   excluirCanalDeRetorno(canalRetorno: CanalRetorno) {
@@ -96,26 +96,33 @@ export class CanalRetornoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       let id = result;
-      if (id) this.desabilitarCanalDeRetorno(id);
+      if (id) this.verificarFollowUpCanalDeRetorno(id);
     });
+  }
+
+  verificarFollowUpCanalDeRetorno(id: number) {
+    this.followUpService.listarFollowUpsPorTipoDeRetorno(id)
+      .subscribe((response) => {
+        if (response.length === 0) this.desabilitarCanalDeRetorno(id);
+        else this.snackbarService.showSnackBar("Não é possível excluir canal de retorno com follow ups ativos!", 5000, "error-snackbar");
+      }, error => {
+        this.snackbarService.exibirErro(error);
+      })
   }
 
   desabilitarCanalDeRetorno(id: number) {
     this.canalRetornoService.desabilitarCanalDeRetorno(id)
       .subscribe(response => {
-        console.log(response);
+        if (response.status === 204) {
+          this.snackbarService.showSnackBar("Canal de retorno excluído com sucesso!", 5000, "success-snackbar");
+
+          setTimeout(() => {
+            this.listarCanaisDeRetorno();
+          }, 800);
+        }
+
       }, error => {
-        console.log(error);
+        this.snackbarService.exibirErro(error);
       })
   }
-
-  // listarCanaisRetornoPorDescricao(descricao: string) {
-  //   this.canalRetornoService.listarCanalDeRetornoPorDescricao(descricao)
-  //     .subscribe((data: CanalRetorno[]) =>{ 
-  //       this.dataSource.data = data; 
-  //     }, error =>{
-
-  //     })
-  // }
-
 }

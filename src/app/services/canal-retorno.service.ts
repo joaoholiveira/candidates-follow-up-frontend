@@ -8,7 +8,7 @@ import { CanalRetorno } from '../model/canal-retorno.model';
   providedIn: 'root'
 })
 export class CanalRetornoService {
-
+  
   constructor(private http: HttpClient) { }
 
   listarTodosCanaisDeRetornoHabilitados() : Observable<CanalRetorno[]>{
@@ -28,7 +28,7 @@ export class CanalRetornoService {
   }
 
   desabilitarCanalDeRetorno(id: number) {
-    return this.http.put(`${ENDPOINTS.desabilitarCanalDeRetorno}`+id, {observe: 'response'});
+    return this.http.put(`${ENDPOINTS.desabilitarCanalDeRetorno}`+id, "", {observe: 'response'});
   }
 
 }

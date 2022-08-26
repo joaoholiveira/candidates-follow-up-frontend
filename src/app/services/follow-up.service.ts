@@ -19,5 +19,10 @@ export class FollowUpService {
     return this.http.get<FollowUp[]>(`${ENDPOINTS.FollowUpHabilitadosPorDescricaoEData}?nomeCandidato=`+nomeCandidato+`&dataRetorno=`+dataRetorno); 
   }
 
+  listarFollowUpsPorTipoDeRetorno(id: number) {
+    return this.http.get<FollowUp[]>(`${ENDPOINTS.FollowUpHabilitadosPorTipoDeRetorno}`+id); 
+  }
+
+
 
 }
