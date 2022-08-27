@@ -20,7 +20,7 @@ export class CanalRetornoComponent implements OnInit {
 
   displayedColumns: string[] = ['descricao', 'excluir'];
   isLoading: boolean = true;
-  hasCanaisRetorno: boolean = true;
+  hasCanaisRetorno: boolean = false;
 
   formFiltro: FormGroup;
 
@@ -50,7 +50,6 @@ export class CanalRetornoComponent implements OnInit {
 
   listarCanaisDeRetorno() {
     this.isLoading = true;
-    this.hasCanaisRetorno = true;
     this.formFiltro.reset();
     this.dataSource.filter = "";
 
@@ -60,6 +59,7 @@ export class CanalRetornoComponent implements OnInit {
         
         setTimeout(() => {
           this.isLoading = false;
+          if (data.length > 0) this.hasCanaisRetorno = true;
         }, 1000);
       }, error => {
         this.isLoading = false;

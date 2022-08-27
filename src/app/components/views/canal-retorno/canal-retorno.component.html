@@ -22,18 +22,19 @@
         <app-loading></app-loading>
     </div>
 
-    <div *ngIf="!hasCanaisRetorno" class="card-has-no-items">
+    <div *ngIf="!hasCanaisRetorno && !isLoading" class="card-has-no-items">
         <div class="texto-has-no-items">
             Nenhum Canal de Retorno encontrado!
         </div>
-        <button mat-button color="primary" type="submit" style="margin: 0 auto;" (click)="listarCanaisDeRetorno()">
+    </div>
+    <div *ngIf="!hasCanaisRetorno && !isLoading" style="width: 320px;height: 80px;margin: 0 auto;justify-content: center;">
+        <button mat-button color="primary" style="width: 320px; margin: 0 auto;" type="submit" (click)="listarCanaisDeRetorno()">
             <i class="material-icons">
                 refresh
             </i>
             Recarregar
         </button>
     </div>
-
 
     <table *ngIf="!isLoading && hasCanaisRetorno" #table mat-table [dataSource]="dataSource" matSort>
 
@@ -57,6 +58,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page">
+    <mat-paginator *ngIf="hasCanaisRetorno" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page">
     </mat-paginator>
 </mat-card>
