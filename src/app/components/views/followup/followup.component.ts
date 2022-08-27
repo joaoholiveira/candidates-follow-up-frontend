@@ -6,6 +6,7 @@ import { CanalRetornoService } from 'src/app/services/canal-retorno.service';
 import { FollowUpService } from 'src/app/services/follow-up.service';
 import { MENSAGEM } from 'src/app/services/utils/mensagens.service';
 import { SnackbarService } from 'src/app/services/utils/snackbar.service';
+import { TableFollowUpComponent } from '../table-follow-up/table-follow-up.component';
 
 @Component({
   selector: 'app-followup',
@@ -22,7 +23,7 @@ export class FollowupComponent implements OnInit {
   constructor(private canalRetornoService: CanalRetornoService, private followUpService: FollowUpService, private snackbarService: SnackbarService) {
     this.followUpForm = new FormGroup({
       id: new FormControl(""),
-      nomeCandidato: new FormControl("João Henrique", [Validators.required, Validators.minLength(2), Validators.maxLength(80)]),
+      nomeCandidato: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(80)]),
       dataRetorno: new FormControl("", [Validators.required]), 
       canalDeRetorno: new FormControl(null, [Validators.required])
     })
@@ -48,8 +49,10 @@ export class FollowupComponent implements OnInit {
   inserirFollowUp(followUp: FollowUp){
     this.followUpService.inserirFollowUp(followUp)
       .subscribe(response =>{
-        if(response.status === 201) this.snackbarService.showSnackBar("Follow Up criado com sucesso!", 4000, "success-snackbar");
-        this.followUpForm.reset();
+        if(response.status === 201) {
+          this.snackbarService.showSnackBar("Follow Up criado com sucesso!", 4000, "success-snackbar");
+          window.location.reload(); 
+        }
       })
   }
 
