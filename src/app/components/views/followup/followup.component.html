@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z8">
-    <form [formGroup]="followUpForm" (ngSubmit)="salvarFollowUp()">
 
+    <form [formGroup]="followUpForm" (ngSubmit)="salvarFollowUp()">
         <mat-form-field class="inputNomeCandidato" appearance="fill">
             <mat-label>Nome do Candidato</mat-label>
             <input matInput formControlName="nomeCandidato" autocomplete="off" required>
@@ -33,6 +33,10 @@
             </i>
             {{textoBotaoSalvar}}
         </button>
-
     </form>
+
+</mat-card>
+
+<mat-card class="card-table" [class.mat-elevation-z8]="true">
+    <app-table-follow-up></app-table-follow-up>
 </mat-card>

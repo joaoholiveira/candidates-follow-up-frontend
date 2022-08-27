@@ -30,6 +30,7 @@ import { CanalRetornoComponent } from "./components/views/canal-retorno/canal-re
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno/edit-canal-retorno.component';
 import { MatSelectModule } from '@angular/material/select';
+import { TableFollowUpComponent } from './components/views/table-follow-up/table-follow-up.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
     DialogComponent,
     FollowupComponent,
     LoadingComponent,
-    CanalRetornoComponent, EditCanalRetornoComponent
+    CanalRetornoComponent, EditCanalRetornoComponent, TableFollowUpComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { FollowUp } from 'src/app/model/follow-up.model';
 import { CanalRetornoService } from 'src/app/services/canal-retorno.service';
 import { FollowUpService } from 'src/app/services/follow-up.service';
 import { MENSAGEM } from 'src/app/services/utils/mensagens.service';
+import { SnackbarService } from 'src/app/services/utils/snackbar.service';
 
 @Component({
   selector: 'app-followup',
@@ -18,7 +19,7 @@ export class FollowupComponent implements OnInit {
   textoBotaoSalvar: string = "Criar Follow Up";
   followUp: FollowUp;  
 
-  constructor(private canalRetornoService: CanalRetornoService, private followUpService: FollowUpService) {
+  constructor(private canalRetornoService: CanalRetornoService, private followUpService: FollowUpService, private snackbarService: SnackbarService) {
     this.followUpForm = new FormGroup({
       id: new FormControl(""),
       nomeCandidato: new FormControl("João Henrique", [Validators.required, Validators.minLength(2), Validators.maxLength(80)]),
@@ -38,6 +39,19 @@ export class FollowupComponent implements OnInit {
       })
   }
 
+  salvarFollowUp(){
+    this.followUp = this.followUpForm.value; 
+    this.followUp.dataRetorno = new Date(this.followUpForm.controls["dataRetorno"].value).toISOString().slice(0, 10); 
+    this.inserirFollowUp(this.followUp); 
+  }
+
+  inserirFollowUp(followUp: FollowUp){
+    this.followUpService.inserirFollowUp(followUp)
+      .subscribe(response =>{
+        if(response.status === 201) this.snackbarService.showSnackBar("Follow Up criado com sucesso!", 4000, "success-snackbar");
+        this.followUpForm.reset();
+      })
+  }
 
   validarInputNomeCandidato(){
     let nomeCandidato = this.followUpForm.controls["nomeCandidato"];
@@ -59,20 +73,6 @@ export class FollowupComponent implements OnInit {
 
     if (canalDeRetorno.hasError('required')) return MENSAGEM.campoObrigatorio;
     return ""; 
-  }
-
-  salvarFollowUp(){
-    this.followUp = this.followUpForm.value; 
-    this.followUp.dataRetorno = new Date(this.followUpForm.controls["dataRetorno"].value).toISOString().slice(0, 10); 
-    this.inserirFollowUp(this.followUp); 
-  }
-
-  inserirFollowUp(followUp: FollowUp){
-    console.log(followUp);
-    this.followUpService.inserirFollowUp(followUp)
-      .subscribe(response =>{
-        console.log(response);
-      })
   }
 
 }
