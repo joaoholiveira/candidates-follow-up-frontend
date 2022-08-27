@@ -20,7 +20,6 @@ export class CanalRetornoComponent implements OnInit {
 
   displayedColumns: string[] = ['descricao', 'excluir'];
   isLoading: boolean = true;
-  hasCanaisRetorno: boolean = false;
 
   formFiltro: FormGroup;
 
@@ -59,11 +58,9 @@ export class CanalRetornoComponent implements OnInit {
         
         setTimeout(() => {
           this.isLoading = false;
-          if (data.length > 0) this.hasCanaisRetorno = true;
         }, 1000);
       }, error => {
         this.isLoading = false;
-        this.hasCanaisRetorno = false;
         setTimeout(() => {
           this.snackbarService.exibirErro(error);
         }, 1000);
