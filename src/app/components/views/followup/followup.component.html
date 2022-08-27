@@ -1,1 +1,38 @@
-<p>followup works!</p>
+<mat-card class="mat-elevation-z8">
+    <form [formGroup]="followUpForm" (ngSubmit)="salvarFollowUp()">
+
+        <mat-form-field class="inputNomeCandidato" appearance="fill">
+            <mat-label>Nome do Candidato</mat-label>
+            <input matInput formControlName="nomeCandidato" autocomplete="off" required>
+            <mat-error *ngIf="followUpForm.invalid">{{validarInputNomeCandidato()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="datepicker" appearance="fill">
+            <mat-label>Data do Follow Up</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dataRetorno" autocomplete="off" required>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-error *ngIf="followUpForm.invalid">{{validarInputDataRetorno()}}</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="selectCanalDeRetorno" appearance="fill">
+            <mat-label>Canal do Follow Up</mat-label>
+            <mat-select formControlName="canalDeRetorno">
+                <mat-option *ngFor="let canal of canaisDeRetorno" [value]="canal">
+                    {{canal.descricao}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="followUpForm.invalid">{{validarSelectCanalDeRetorno()}}</mat-error>
+        </mat-form-field>
+
+        <button mat-button type="submit" class="btn-success-follow-up-form" [disabled]="followUpForm.invalid"
+            [style.background-color]="followUpForm.invalid ? '#898c8a' : '#39ad58'">
+            <i class="material-icons">
+                check
+            </i>
+            {{textoBotaoSalvar}}
+        </button>
+
+    </form>
+</mat-card>

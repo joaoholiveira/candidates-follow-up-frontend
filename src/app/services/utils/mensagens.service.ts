@@ -5,6 +5,8 @@ export const MENSAGEM = {
   erroInserirCanalRetorno: "Erro ao inserir canal de retorno!", 
   erroEditarCanalRetorno: "Erro ao editar canal de retorno!", 
   canalRetornoInseridoComSucesso: " Canal de Retorno inserido com sucesso!",
-  canalRetornoEditadoComSucesso: " Canal de Retorno atualizado com sucesso!"
+  canalRetornoEditadoComSucesso: " Canal de Retorno atualizado com sucesso!", 
+
+  tamanhoNomeCandidato: "Nome do candidato deve ter entre 2 e 80 caracteres!"
 
 }

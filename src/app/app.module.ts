@@ -29,6 +29,7 @@ import { LoadingComponent } from './components/templates/loading/loading.compone
 import { CanalRetornoComponent } from "./components/views/canal-retorno/canal-retorno.component";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno/edit-canal-retorno.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { EditCanalRetornoComponent } from './components/views/edit-canal-retorno
     MatSortModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule, 
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

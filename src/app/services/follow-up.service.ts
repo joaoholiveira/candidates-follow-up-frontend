@@ -23,6 +23,10 @@ export class FollowUpService {
     return this.http.get<FollowUp[]>(`${ENDPOINTS.FollowUpHabilitadosPorTipoDeRetorno}`+id); 
   }
 
+  inserirFollowUp(followUp: FollowUp) {
+    return this.http.post(`${ENDPOINTS.FollowUp}`, followUp, {observe: 'response'}); 
+  }
+
 
 
 }

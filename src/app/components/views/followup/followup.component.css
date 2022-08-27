@@ -1,0 +1,22 @@
+.inputNomeCandidato{
+    margin-left: 1rem;
+    width: 700px;
+}
+
+.datepicker {
+    background-color: white;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+.selectCanalDeRetorno{
+    margin-left: 1rem;
+    width: 350px;
+}
+
+.btn-success-follow-up-form {
+    color: white;
+    background-color: #2ea34d;
+    margin-top: 0.8rem;
+    margin-left: 2rem;
+}
