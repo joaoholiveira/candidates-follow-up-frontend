@@ -1,6 +1,14 @@
 <mat-card class="mat-elevation-z8">
 
     <form [formGroup]="followUpForm" (ngSubmit)="salvarFollowUp()">
+
+        <button mat-button *ngIf="isEditing" color="primary" style="margin-bottom: 2px;" (click)="novo()">
+            <i class="material-icons">
+                add
+            </i>
+            Novo
+        </button><br>
+
         <mat-form-field class="inputNomeCandidato" appearance="fill">
             <mat-label>Nome do Candidato</mat-label>
             <input matInput formControlName="nomeCandidato" autocomplete="off" required>
@@ -17,8 +25,10 @@
         </mat-form-field>
 
         <mat-form-field class="selectCanalDeRetorno" appearance="fill">
-            <mat-label>Canal do Follow Up</mat-label>
+            <mat-label *ngIf="!isEditing">Canal do Follow Up</mat-label>
+            <mat-label *ngIf="isEditing"><strong>{{descricaoCanalDeRetornoSelecionado}}</strong></mat-label>
             <mat-select formControlName="canalDeRetorno">
+                <mat-option *ngIf="isEditing" disabled>{{descricaoCanalDeRetornoSelecionado}}</mat-option>
                 <mat-option *ngFor="let canal of canaisDeRetorno" [value]="canal">
                     {{canal.descricao}}
                 </mat-option>
@@ -38,5 +48,5 @@
 </mat-card>
 
 <mat-card class="card-table" [class.mat-elevation-z8]="true">
-    <app-table-follow-up></app-table-follow-up>
+    <app-table-follow-up (followUpEventEmitter)="preencherForm($event)"></app-table-follow-up>
 </mat-card>

@@ -18,7 +18,9 @@ export class FollowupComponent implements OnInit {
   followUpForm: FormGroup;
   canaisDeRetorno: CanalRetorno[] = []; 
   textoBotaoSalvar: string = "Criar Follow Up";
-  followUp: FollowUp;  
+  followUp: FollowUp; 
+  descricaoCanalDeRetornoSelecionado: string= ""; 
+  isEditing: boolean = false; 
 
   constructor(private canalRetornoService: CanalRetornoService, private followUpService: FollowUpService, private snackbarService: SnackbarService) {
     this.followUpForm = new FormGroup({
@@ -43,7 +45,9 @@ export class FollowupComponent implements OnInit {
   salvarFollowUp(){
     this.followUp = this.followUpForm.value; 
     this.followUp.dataRetorno = new Date(this.followUpForm.controls["dataRetorno"].value).toISOString().slice(0, 10); 
-    this.inserirFollowUp(this.followUp); 
+
+    if (!this.followUp.id) this.inserirFollowUp(this.followUp);
+    else this.atualizarFollowUp(this.followUp); 
   }
 
   inserirFollowUp(followUp: FollowUp){
@@ -53,7 +57,43 @@ export class FollowupComponent implements OnInit {
           this.snackbarService.showSnackBar("Follow Up criado com sucesso!", 4000, "success-snackbar");
           window.location.reload(); 
         }
+      }, () => {
+        this.snackbarService.showSnackBar("Erro ao inserir Follow Up! Tente novamente.", 6000, "error-snackbar");
       })
+  }
+
+  atualizarFollowUp(followUp: FollowUp) {
+    this.followUpService.atualizarFollowUp(followUp)
+      .subscribe(response =>{
+        if(response.status === 204) {
+          this.snackbarService.showSnackBar("Follow Up atualizado com sucesso!", 4000, "success-snackbar");
+          window.location.reload(); 
+        }
+      }, () => {
+        this.snackbarService.showSnackBar("Erro ao atualizar Follow Up! Tente novamente.", 6000, "error-snackbar");
+      })
+  }
+
+  preencherForm(fupSelecionado: FollowUp){
+    this.followUpForm.reset();
+    
+    this.descricaoCanalDeRetornoSelecionado = "Selecionado: " + fupSelecionado.tipoRetorno.descricao; 
+
+    this.followUpForm.setValue({
+      id: fupSelecionado.id,
+      nomeCandidato: fupSelecionado.nomeCandidato,
+      dataRetorno: new Date(fupSelecionado.dataRetorno), 
+      canalDeRetorno: fupSelecionado.tipoRetorno
+    })
+
+    this.isEditing = true; 
+    this.textoBotaoSalvar = "Salvar Alterações";
+  }
+
+  novo(){
+    this.textoBotaoSalvar = "Criar Follow Up";
+    this.isEditing = false;  
+    this.followUpForm.reset();
   }
 
   validarInputNomeCandidato(){

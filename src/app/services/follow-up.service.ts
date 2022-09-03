@@ -31,6 +31,8 @@ export class FollowUpService {
     return this.http.post(`${ENDPOINTS.FollowUp}`, followUp, {observe: 'response'}); 
   }
 
-
+  atualizarFollowUp(followUp: FollowUp) {
+    return this.http.put(`${ENDPOINTS.FollowUp}`+followUp.id, followUp, {observe: 'response'}); 
+  }
 
 }
