@@ -1,3 +1,17 @@
+    <mat-form-field class="input" appearance="fill" style="margin-right: 2rem;">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="filtrarFollowUp($event)" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field class="datepicker" appearance="fill">
+        <mat-label>Filtrar por Data</mat-label>
+        <input matInput [matDatepicker]="picker" (dateChange)="filtrarFollowUpPorData($event)">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
 <table #table mat-table [dataSource]="followUps" matSort>
 
     <ng-container matColumnDef="nomeCandidato">
@@ -6,24 +20,13 @@
     </ng-container>
 
     <ng-container matColumnDef="dataRetorno">
-        <th class="th" mat-header-cell *matHeaderCellDef> Data do Follow Up </th>
+        <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Data do Follow Up </th>
         <td mat-cell *matCellDef="let followup"> {{followup.dataRetorno}} </td>
     </ng-container>
 
     <ng-container matColumnDef="tipoRetorno">
         <th class="th" mat-header-cell *matHeaderCellDef> Canal do Follow Up </th>
         <td mat-cell *matCellDef="let followup"> {{followup.tipoRetorno.descricao}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="excluir">
-        <th class="th" mat-header-cell *matHeaderCellDef> Excluir </th>
-        <td mat-cell *matCellDef="let followup"> 
-            <button mat-button color="warn">
-                <i class="material-icons">
-                    delete_outline
-                </i>
-            </button>
-        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

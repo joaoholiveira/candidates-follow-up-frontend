@@ -24,3 +24,11 @@
 .card-table{
     margin-top: 1rem;
 }
+
+.btn-excluir {
+    margin-top: 0.8rem;
+    margin-right: 10rem;
+    background: none;
+    color: #e62424;
+    float: right;
+}

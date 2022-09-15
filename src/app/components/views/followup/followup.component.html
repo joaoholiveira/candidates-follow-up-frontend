@@ -2,12 +2,14 @@
 
     <form [formGroup]="followUpForm" (ngSubmit)="salvarFollowUp()">
 
-        <button mat-button *ngIf="isEditing" color="primary" style="margin-bottom: 2px;" (click)="novo()">
-            <i class="material-icons">
-                add
-            </i>
-            Novo
-        </button><br>
+        <div *ngIf="isEditing">
+            <button mat-button color="primary" style="margin-bottom: 2px;" (click)="novo()">
+                <i class="material-icons">
+                    add
+                </i>
+                Novo
+            </button>
+        </div>
 
         <mat-form-field class="inputNomeCandidato" appearance="fill">
             <mat-label>Nome do Candidato</mat-label>
@@ -43,6 +45,14 @@
             </i>
             {{textoBotaoSalvar}}
         </button>
+
+        <button mat-button type="button" class="btn-excluir" *ngIf="isEditing" (click)="desabilitarFollowUp()">
+            <i class="material-icons">
+                delete_outline
+            </i>
+            Excluir
+        </button>
+
     </form>
 
 </mat-card>

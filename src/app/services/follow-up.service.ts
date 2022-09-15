@@ -35,4 +35,7 @@ export class FollowUpService {
     return this.http.put(`${ENDPOINTS.FollowUp}`+followUp.id, followUp, {observe: 'response'}); 
   }
 
+  disableFollowUp(id: number) {
+    return this.http.put(`${ENDPOINTS.desabilitarFollowUp}`+id, "", {observe: 'response'}); 
+  }
 }

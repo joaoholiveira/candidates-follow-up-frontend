@@ -61,7 +61,7 @@ import { TableFollowUpComponent } from './components/views/table-follow-up/table
     MatSortModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule, 
+    MatSnackBarModule,
     MatSelectModule
   ],
   providers: [],
